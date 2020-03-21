@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 自定义拦截器需要实现HandlerInterceptor接口，覆写其preHandle()默认方法，在该方法中自定义拦截规则，
  * 然后需要在配置类（需要继承WebMvcConfigurationSupport抽象类）中来配置该自定义拦截器
+ *
  */
 @Component
 public class MyInterceptor implements HandlerInterceptor {
