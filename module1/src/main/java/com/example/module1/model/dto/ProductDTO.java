@@ -15,10 +15,6 @@ import java.math.BigDecimal;
  * <p>
  * 
  * </p>
- *
- * @description: 
- * @author: fenmi
- * @date: Created in 2020-03-13 15:01:03
  */
 @ApiModel("")
 @Data

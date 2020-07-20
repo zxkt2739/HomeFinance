@@ -4,6 +4,8 @@ import com.example.core.common.PagingContext;
 import com.example.core.common.SortingContext;
 import com.example.core.common.R;
 import com.example.core.util.I18nUtils;
+import com.example.core.util.RedisUtils;
+import com.example.module1.annotation.AccessLimit;
 import com.example.module1.model.dto.ProductDTO;
 import com.example.module1.model.entity.Product;
 import com.example.module1.service.ProductService;
@@ -30,13 +32,7 @@ import lombok.extern.slf4j.Slf4j;
  * 
  * </p>
  *
- * @package:  com.example.module1.controller
- * @description: 
- * @author: fenmi
- * @date: Created in 2020-03-13 15:01:03
- * @copyright: Copyright (c) 2020
- * @version: V1.0
- * @modified: fenmi
+ *
  */
 @RestController
 @RequestMapping("/product")
@@ -55,6 +51,7 @@ public class ProductController extends BaseController<Product> {
             @ApiImplicitParam(name = "scs", value = "排序字段，格式：scs=name(asc)&scs=age(desc)", paramType = "query")
     })
     @GetMapping(name = "查询-列表")
+    @AccessLimit(seconds = 5, maxCount = 3, needLogin = true)
     public Object list(HttpServletRequest request) {
         Map<String, Object> params = getConditionsMap(request);
         int total = productService.count(params);

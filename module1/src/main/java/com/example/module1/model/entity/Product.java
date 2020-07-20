@@ -13,11 +13,6 @@ import java.math.BigDecimal;
  * 
  * </p>
  *
- * @package:  com.example.module1.entity
- * @description: 
- * @author: fenmi
- * @date: Created in 2020-03-13 15:01:03
- * @copyright: Copyright (c) 2020
  */
 @Data
 @ApiModel(description = "")

@@ -16,13 +16,6 @@ import java.util.Vector;
  * 
  * </p>
  *
- * @package:  com.example.module1.service
- * @description: 
- * @author: fenmi
- * @date: Created in 2020-03-13 15:01:03
- * @copyright: Copyright (c) 2020
- * @version: V1.0
- * @modified: fenmi
  */
 public interface ProductService extends BaseService {
 

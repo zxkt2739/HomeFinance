@@ -5,7 +5,9 @@ import com.example.core.common.PagingContext;
 import com.example.core.common.SortingContext;
 import com.example.core.model.entity.BaseEntity;
 import com.example.core.util.JwtUtils;
+import com.example.core.util.RedisUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 import javax.servlet.http.HttpServletRequest;

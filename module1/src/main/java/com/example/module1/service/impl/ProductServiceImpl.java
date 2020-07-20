@@ -26,13 +26,6 @@ import java.util.*;
  * 
  * </p>
  *
- * @package: com.example.module1.service.impl
- * @description: 
- * @author: fenmi
- * @date: Created in 2020-03-13 15:01:03
- * @copyright: Copyright (c) 2020
- * @version: V1.0
- * @modified: fenmi
  */
 @Service
 @Slf4j
