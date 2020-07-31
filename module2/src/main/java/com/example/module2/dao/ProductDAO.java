@@ -1,12 +1,12 @@
-package com.example.module1.dao;
+package com.example.module2.dao;
 
-import com.example.module1.model.dto.ProductDTO;
-import com.example.module1.model.entity.Product;
 import com.example.core.dao.BaseDAO;
+import com.example.module2.model.dto.ProductDTO;
+import com.example.module2.model.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
-import java.util.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>

@@ -1,7 +1,7 @@
 package com.example.module1.service;
 
-import com.example.module1.model.dto.ProductDTO;
-import com.example.module1.model.entity.Product;
+import com.example.module1.model.dto.UserDTO;
+import com.example.module1.model.entity.User;
 import com.example.core.common.PagingContext;
 import com.example.core.common.SortingContext;
 import com.example.core.service.BaseService;
@@ -13,81 +13,88 @@ import java.util.Vector;
 
 /**
  * <p>
- * 
+ * 用户表
  * </p>
  *
+ * @package:  com.example.module1.service
+ * @description: 用户表
+ * @author: fenmi
+ * @date: Created in 2020-07-31 16:00:02
+ * @copyright: Copyright (c) 2020
+ * @version: V1.0
+ * @modified: fenmi
  */
-public interface ProductService extends BaseService {
+public interface UserService extends BaseService {
 
    /**
-    * 保存一条 Product 数据
+    * 保存一条 User 数据
     *
-    * @param productDTO 待保存的数据
+    * @param userDTO 待保存的数据
     * @param request
     * @throws BizException 保存失败异常
     */
-    void saveProduct(ProductDTO productDTO, HttpServletRequest request) throws BizException;
+    void saveUser(UserDTO userDTO, HttpServletRequest request) throws BizException;
 
     /**
-     * 保存多条 Product 数据
+     * 保存多条 User 数据
      *
-     * @param productList 待保存的数据列表
+     * @param userList 待保存的数据列表
      * @param request
      * @throws BizException 保存失败异常
      */
-    void saveProductList(List<Product> productList, HttpServletRequest request) throws BizException;
+    void saveUserList(List<User> userList, HttpServletRequest request) throws BizException;
 
     /**
-     * 修改一条 Product 数据
+     * 修改一条 User 数据
      *
      * @param id 数据唯一id
-     * @param productDTO 待修改的数据
+     * @param userDTO 待修改的数据
      * @param request
      * @throws BizException 修改失败异常
      */
-    void updateProduct(Long id, ProductDTO productDTO, HttpServletRequest request) throws BizException;
+    void updateUser(Long id, UserDTO userDTO, HttpServletRequest request) throws BizException;
 
     /**
-     * 根据Id部分更新实体 product
+     * 根据Id部分更新实体 user
      *
      * @param dataMap 需要更新的键值对
      * @param conditionMap where语句后的条件筛选的键值对
      */
-    void updateProductSelective(Map<String, Object> dataMap, Map<String, Object> conditionMap);
+    void updateUserSelective(Map<String, Object> dataMap, Map<String, Object> conditionMap);
 
     /**
-     * 根据id逻辑删除一条 Product
+     * 根据id逻辑删除一条 User
      *
      * @param id 数据唯一id
      * @param request
      * @throws BizException 逻辑删除异常
      */
-    void logicDeleteProduct(Long id, HttpServletRequest request) throws BizException;
+    void logicDeleteUser(Long id, HttpServletRequest request) throws BizException;
 
     /**
-     * 根据id物理删除一条 Product
+     * 根据id物理删除一条 User
      *
      * @param id 数据唯一id
      * @param request
      * @throws BizException 物理删除异常
      */
-    void deleteProduct(Long id, HttpServletRequest request) throws BizException;
+    void deleteUser(Long id, HttpServletRequest request) throws BizException;
 
     /**
-     * 根据id查询一条 Product
+     * 根据id查询一条 User
      *
      * @param id 数据唯一id
-     * @return 查询到的 Product 数据
+     * @return 查询到的 User 数据
      */
-    ProductDTO findProductById(Long id);
+    UserDTO findUserById(Long id);
 
     /**
-     * 根据条件查询得到第一条 product
+     * 根据条件查询得到第一条 user
      *
      * @param params 查询条件
-     * @return 符合条件的一个 product
+     * @return 符合条件的一个 user
      */
-    ProductDTO findOneProduct(Map<String, Object> params);
+    UserDTO findOneUser(Map<String, Object> params);
 
     /**
      * 根据查询条件得到数据列表，包含分页和排序信息
@@ -97,7 +104,7 @@ public interface ProductService extends BaseService {
      * @param pc     分页信息
      * @return 查询结果的数据集合
      */
-    List<ProductDTO> find(Map<String, Object> params, Vector<SortingContext> scs, PagingContext pc);
+    List<UserDTO> find(Map<String, Object> params, Vector<SortingContext> scs, PagingContext pc);
 
     /**
      * 根据查询条件得到指定字段集合的数据列表，包含分页和排序信息

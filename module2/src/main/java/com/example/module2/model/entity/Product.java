@@ -1,4 +1,4 @@
-package com.example.module1.model.entity;
+package com.example.module2.model.entity;
 
 import com.example.core.model.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;

@@ -1,7 +1,7 @@
-package com.example.module1.model.dto;
+package com.example.module2.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.example.core.model.dto.BaseDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

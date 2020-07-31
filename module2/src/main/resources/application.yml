@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: module1
+    name: module2
 
   datasource:
     driver-class-name : com.mysql.cj.jdbc.Driver
@@ -27,7 +27,7 @@ spring:
     database: 1
 
 mybatis:
-  type-aliases-package: com.example.module1.model.entity
+  type-aliases-package: com.example.module2.model.entity
   mapper-locations: classpath:mapper/*.xml
   configuration:
     cache-enabled: true

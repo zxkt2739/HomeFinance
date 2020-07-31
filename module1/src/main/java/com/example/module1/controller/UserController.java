@@ -4,12 +4,10 @@ import com.example.core.common.PagingContext;
 import com.example.core.common.SortingContext;
 import com.example.core.common.R;
 import com.example.core.util.I18nUtils;
-import com.example.core.util.RedisUtils;
-import com.example.module1.annotation.AccessLimit;
-import com.example.module1.model.dto.ProductDTO;
-import com.example.module1.model.entity.Product;
-import com.example.module1.service.ProductService;
-import com.example.module1.annotation.ActionFlag;
+import com.example.module1.model.dto.UserDTO;
+import com.example.module1.model.entity.User;
+import com.example.module1.service.UserService;
+import com.example.module1.filter.ActionFlag;
 import com.example.core.enumeration.ErrorCodeEnum;
 import com.example.core.exception.BizException;
 import com.example.core.controller.BaseController;
@@ -29,107 +27,112 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * <p>
- * 
+ * 用户表
  * </p>
  *
- *
+ * @package:  com.example.module1.controller
+ * @description: 用户表
+ * @author: fenmi
+ * @date: Created in 2020-07-31 16:00:14
+ * @copyright: Copyright (c) 2020
+ * @version: V1.0
+ * @modified: fenmi
  */
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/user")
 @Slf4j
-@Api("")
-public class ProductController extends BaseController<Product> {
+@Api("用户表")
+public class UserController extends BaseController<User> {
 
     @Autowired
-    private ProductService productService;
+    private UserService userService;
 
-    @ActionFlag(detail = "Product_list")
-    @ApiOperation(value = "分页查询", notes = "分页查询以及排序功能")
+    @ActionFlag(detail = "User_list")
+    @ApiOperation(value = "分页查询用户表", notes = "分页查询用户表以及排序功能")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "s", value = "每页的条数", paramType = "query"),
             @ApiImplicitParam(name = "p", value = "请求的页码", paramType = "query"),
             @ApiImplicitParam(name = "scs", value = "排序字段，格式：scs=name(asc)&scs=age(desc)", paramType = "query")
     })
-    @GetMapping(name = "查询-列表")
-    @AccessLimit(seconds = 5, maxCount = 3, needLogin = true)
+    @GetMapping(name = "查询-用户表列表")
     public Object list(HttpServletRequest request) {
         Map<String, Object> params = getConditionsMap(request);
-        int total = productService.count(params);
+        int total = userService.count(params);
         PagingContext pc;
         Vector<SortingContext> scs;
-        List<ProductDTO> list = new ArrayList<>();
+        List<UserDTO> list = new ArrayList<>();
         pc = getPagingContext(request, total);
         if (total > 0) {
             scs = getSortingContext(request);
-            list = productService.find(params, scs, pc);
+            list = userService.find(params, scs, pc);
         }
         return R.success(list, pc);
     }
 
-    @ApiOperation(value = "通过id查询", notes = "通过id查询")
+    @ApiOperation(value = "通过id查询用户表", notes = "通过id查询用户表")
     @ApiImplicitParam(name = "id", value = "主键id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/{id}", name="详情")
     public Object view(@PathVariable("id") Long id) {
-        log.info("get product Id:{}", id);
-        return R.success(productService.findProductById(id));
+        log.info("get user Id:{}", id);
+        return R.success(userService.findUserById(id));
     }
 
-    @ApiOperation(value = "通过查询条件查询一条数据", notes = "通过查询条件查询一条数据")
-    @GetMapping(value = "/findOne", name="通过查询条件查询一条数据")
+    @ApiOperation(value = "通过查询条件查询用户表一条数据", notes = "通过查询条件查询用户表一条数据")
+    @GetMapping(value = "/findOne", name="通过查询条件查询用户表一条数据")
     public Object findOne(HttpServletRequest request) {
         Map<String, Object> params = getConditionsMap(request);
-        log.info("get product findOne params:{}", params);
-        int total = productService.count(params);
+        log.info("get user findOne params:{}", params);
+        int total = userService.count(params);
         if (total > 1) {
-            log.error("get product findOne params: {}, error message:{}", params, "查询失败，返回多条数据");
+            log.error("get user findOne params: {}, error message:{}", params, "查询失败，返回多条数据");
             return R.fail(ErrorCodeEnum.FAIL_CODE.getCode(), I18nUtils.get("query.failed.return.multiple.data", getLang(request)));
         }
-        ProductDTO productDTO = null;
+        UserDTO userDTO = null;
         if (total == 1) {
-            productDTO = productService.findOneProduct(params);
+            userDTO = userService.findOneUser(params);
         }
-        return R.success(productDTO);
+        return R.success(userDTO);
     }
 
-    @ActionFlag(detail = "Product_add")
+    @ActionFlag(detail = "User_add")
     @PostMapping(name = "创建")
-    @ApiOperation(value = "新增", notes = "新增")
-    public Object create(@RequestBody ProductDTO productDTO, HttpServletRequest request) {
-        log.info("add product DTO:{}", productDTO);
+    @ApiOperation(value = "新增用户表", notes = "新增用户表")
+    public Object create(@RequestBody UserDTO userDTO, HttpServletRequest request) {
+        log.info("add user DTO:{}", userDTO);
         try {
-            productService.saveProduct(productDTO, request);
+            userService.saveUser(userDTO, request);
         } catch (BizException e) {
-            log.error("add product failed, productDTO: {}, error message:{}, error all:{}", productDTO, e.getMessage(), e);
+            log.error("add user failed, userDTO: {}, error message:{}, error all:{}", userDTO, e.getMessage(), e);
             return R.fail(ErrorCodeEnum.INSERT_FAILED_ERROR.getCode(), e.getMessage());
         }
         return R.success();
     }
 
-    @ActionFlag(detail = "Product_update")
+    @ActionFlag(detail = "User_update")
     @PutMapping("/{id}")
-    @ApiOperation(value = "修改", notes = "修改")
+    @ApiOperation(value = "修改用户表", notes = "修改用户表")
     @ApiImplicitParam(name = "id", value = "主键id", dataType = "Long", paramType = "path", required = true)
-    public Object update(@PathVariable("id") Long id, @RequestBody ProductDTO productDTO, HttpServletRequest request) {
-        log.info("put modify id:{}, product DTO:{}", id, productDTO);
+    public Object update(@PathVariable("id") Long id, @RequestBody UserDTO userDTO, HttpServletRequest request) {
+        log.info("put modify id:{}, user DTO:{}", id, userDTO);
         try {
-            productService.updateProduct(id, productDTO, request);
+            userService.updateUser(id, userDTO, request);
         } catch (BizException e) {
-            log.error("update product failed, productDTO: {}, error message:{}, error all:{}", productDTO, e.getMessage(), e);
+            log.error("update user failed, userDTO: {}, error message:{}, error all:{}", userDTO, e.getMessage(), e);
             return R.fail(ErrorCodeEnum.UPDATE_FAILED_ERROR.getCode(), e.getMessage());
         }
         return R.success();
     }
 
-    @ActionFlag(detail = "Product_delete")
+    @ActionFlag(detail = "User_delete")
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "删除", notes = "删除")
+    @ApiOperation(value = "删除用户表", notes = "删除用户表")
     @ApiImplicitParam(name = "id", value = "主键id", dataType = "Long", paramType = "path", required = true)
     public Object remove(@PathVariable("id") Long id, HttpServletRequest request) {
-        log.info("delete product, id:{}", id);
+        log.info("delete user, id:{}", id);
         try {
-            productService.logicDeleteProduct(id, request);
+            userService.logicDeleteUser(id, request);
         } catch (BizException e) {
-            log.error("delete failed, product id: {}, error message:{}, error all:{}", id, e.getMessage(), e);
+            log.error("delete failed, user id: {}, error message:{}, error all:{}", id, e.getMessage(), e);
             return R.fail(ErrorCodeEnum.DELETE_FAILED_ERROR.getCode(), e.getMessage());
         }
         return R.success();

@@ -1,10 +1,10 @@
 package com.example.module1.service.impl;
 
 import com.example.core.util.I18nUtils;
-import com.example.module1.dao.ProductDAO;
-import com.example.module1.model.dto.ProductDTO;
-import com.example.module1.model.entity.Product;
-import com.example.module1.service.ProductService;
+import com.example.module1.dao.UserDAO;
+import com.example.module1.model.dto.UserDTO;
+import com.example.module1.model.entity.User;
+import com.example.module1.service.UserService;
 import com.example.core.common.PagingContext;
 import com.example.core.common.SortingContext;
 import com.example.core.service.impl.BaseServiceImpl;
@@ -23,69 +23,76 @@ import java.util.*;
 
 /**
  * <p>
- * 
+ * 用户表
  * </p>
  *
+ * @package: com.example.module1.service.impl
+ * @description: 用户表
+ * @author: fenmi
+ * @date: Created in 2020-07-31 16:00:07
+ * @copyright: Copyright (c) 2020
+ * @version: V1.0
+ * @modified: fenmi
  */
 @Service
 @Slf4j
-public class ProductServiceImpl extends BaseServiceImpl implements ProductService {
+public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
     @Autowired
-    private ProductDAO productDAO;
+    private UserDAO userDAO;
 
     @Override
-    public void saveProduct(@NonNull ProductDTO productDTO, HttpServletRequest request) throws BizException {
-        Product product = BeanUtil.copyProperties(productDTO, new Product());
-        log.info("save Product:{}", product);
-        if (productDAO.insert((Product) this.packAddBaseProps(product, request)) != 1) {
-            log.error("insert error, data:{}", product);
-            throw new BizException("Insert product Error!");
+    public void saveUser(@NonNull UserDTO userDTO, HttpServletRequest request) throws BizException {
+        User user = BeanUtil.copyProperties(userDTO, new User());
+        log.info("save User:{}", user);
+        if (userDAO.insert((User) this.packAddBaseProps(user, request)) != 1) {
+            log.error("insert error, data:{}", user);
+            throw new BizException("Insert user Error!");
         }
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void saveProductList(@NonNull List<Product> productList, HttpServletRequest request) throws BizException {
-        if (productList.size() == 0) {
+    public void saveUserList(@NonNull List<User> userList, HttpServletRequest request) throws BizException {
+        if (userList.size() == 0) {
             throw new BizException(I18nUtils.get("parameter.rule.length", getLang(request)));
         }
-        int rows = productDAO.insertList(productList);
-        if (rows != productList.size()) {
-            log.error("数据库实际插入成功数({})与给定的({})不一致", rows, productList.size());
+        int rows = userDAO.insertList(userList);
+        if (rows != userList.size()) {
+            log.error("数据库实际插入成功数({})与给定的({})不一致", rows, userList.size());
             throw new BizException(I18nUtils.get("batch.saving.exception", getLang(request)));
         }
     }
 
     @Override
-    public void updateProduct(@NonNull Long id, @NonNull ProductDTO productDTO, HttpServletRequest request) throws BizException {
-        log.info("full update productDTO:{}", productDTO);
-        Product product = BeanUtil.copyProperties(productDTO, new Product());
-        product.setId(id);
-        int cnt = productDAO.update((Product) this.packModifyBaseProps(product, request));
+    public void updateUser(@NonNull Long id, @NonNull UserDTO userDTO, HttpServletRequest request) throws BizException {
+        log.info("full update userDTO:{}", userDTO);
+        User user = BeanUtil.copyProperties(userDTO, new User());
+        user.setId(id);
+        int cnt = userDAO.update((User) this.packModifyBaseProps(user, request));
         if (cnt != 1) {
-            log.error("update error, data:{}", productDTO);
-            throw new BizException("update product Error!");
+            log.error("update error, data:{}", userDTO);
+            throw new BizException("update user Error!");
         }
     }
 
     @Override
-    public void updateProductSelective(@NonNull Map<String, Object> dataMap, @NonNull Map<String, Object> conditionMap) {
+    public void updateUserSelective(@NonNull Map<String, Object> dataMap, @NonNull Map<String, Object> conditionMap) {
         log.info("part update dataMap:{}, conditionMap:{}", dataMap, conditionMap);
         Map<String, Object> params = new HashMap<>(2);
         params.put("datas", dataMap);
         params.put("conditions", conditionMap);
-        productDAO.updatex(params);
+        userDAO.updatex(params);
     }
 
     @Override
-    public void logicDeleteProduct(@NonNull Long id, HttpServletRequest request) throws BizException {
+    public void logicDeleteUser(@NonNull Long id, HttpServletRequest request) throws BizException {
         log.info("逻辑删除，数据id:{}", id);
         Map<String, Object> params = new HashMap<>(3);
         params.put("id", id);
         params.put("modifiedBy", getUserId(request));
         params.put("modifiedDate", System.currentTimeMillis());
-        int rows = productDAO.delete(params);
+        int rows = userDAO.delete(params);
         if (rows != 1) {
             log.error("逻辑删除异常, rows:{}", rows);
             throw new BizException(I18nUtils.get("delete.failed", getLang(request)));
@@ -93,11 +100,11 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
     }
 
     @Override
-    public void deleteProduct(@NonNull Long id, HttpServletRequest request) throws BizException {
+    public void deleteUser(@NonNull Long id, HttpServletRequest request) throws BizException {
         log.info("物理删除, id:{}", id);
         Map<String, Object> params = new HashMap<>(1);
         params.put("id", id);
-        int rows = productDAO.pdelete(params);
+        int rows = userDAO.pdelete(params);
         if (rows != 1) {
             log.error("删除异常, 实际删除了{}条数据", rows);
             throw new BizException(I18nUtils.get("delete.failed", getLang(request)));
@@ -105,28 +112,28 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
     }
 
     @Override
-    public ProductDTO findProductById(@NonNull Long id) {
+    public UserDTO findUserById(@NonNull Long id) {
         Map<String, Object> params = new HashMap<>(1);
         params.put("id", id);
-        ProductDTO productDTO = productDAO.selectOneDTO(params);
-        return productDTO;
+        UserDTO userDTO = userDAO.selectOneDTO(params);
+        return userDTO;
     }
 
     @Override
-    public ProductDTO findOneProduct(@NonNull Map<String, Object> params) {
+    public UserDTO findOneUser(@NonNull Map<String, Object> params) {
         log.info("find one params:{}", params);
-        Product product = productDAO.selectOne(params);
-        ProductDTO productDTO = new ProductDTO();
-        if (null != product) {
-            BeanUtils.copyProperties(product, productDTO);
+        User user = userDAO.selectOne(params);
+        UserDTO userDTO = new UserDTO();
+        if (null != user) {
+            BeanUtils.copyProperties(user, userDTO);
         }
-        return productDTO;
+        return userDTO;
     }
 
     @Override
-    public List<ProductDTO> find(@NonNull Map<String, Object> params, Vector<SortingContext> scs, PagingContext pc) {
+    public List<UserDTO> find(@NonNull Map<String, Object> params, Vector<SortingContext> scs, PagingContext pc) {
         params = getUnionParams(params, scs, pc);
-        List<ProductDTO> resultList = productDAO.selectDTO(params);
+        List<UserDTO> resultList = userDAO.selectDTO(params);
         return resultList;
     }
 
@@ -137,7 +144,7 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
         }
         params = getUnionParams(params, scs, pc);
         params.put("columns", columns);
-        return productDAO.selectMap(params);
+        return userDAO.selectMap(params);
     }
 
     private Map<String, Object> getUnionParams(@NonNull Map<String, Object> params, Vector<SortingContext> scs, PagingContext pc) {
@@ -148,7 +155,7 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 
     @Override
     public int count(@NonNull Map<String, Object> params) {
-        return productDAO.count(params);
+        return userDAO.count(params);
     }
 
     @Override
@@ -157,7 +164,7 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
             conditions = new HashMap<>(1);
         }
         conditions.put("group", group);
-        List<Map<String, Object>> maps = productDAO.groupCount(conditions);
+        List<Map<String, Object>> maps = userDAO.groupCount(conditions);
         Map<String, Integer> map = new LinkedHashMap<>();
         for (Map<String, Object> m : maps) {
             String key = m.get("group") != null ? m.get("group").toString() : "group";
@@ -177,7 +184,7 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
             conditions = new HashMap<>(2);
         }
         conditions.put("sumfield", sumField);
-        return productDAO.sum(conditions);
+        return userDAO.sum(conditions);
     }
 
     @Override
@@ -187,7 +194,7 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
         }
         conditions.put("group", group);
         conditions.put("sumfield", sumField);
-        List<Map<String, Object>> maps = productDAO.groupSum(conditions);
+        List<Map<String, Object>> maps = userDAO.groupSum(conditions);
         Map<String, Double> map = new LinkedHashMap<>();
         for (Map<String, Object> m : maps) {
             String key = m.get("group") != null ? m.get("group").toString() : "group";
