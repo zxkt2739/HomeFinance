@@ -33,6 +33,7 @@ public class MemberDTO extends BaseDTO implements Serializable {
      */
     @ApiModelProperty(value = "姓名")
     private String name;
+
     /**
      * 用户表id
      */
