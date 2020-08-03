@@ -18,11 +18,7 @@ import java.util.Vector;
  *
  * @package:  com.example.module1.service
  * @description: 主分类表
- * @author: fenmi
- * @date: Created in 2020-07-31 16:00:02
- * @copyright: Copyright (c) 2020
  * @version: V1.0
- * @modified: fenmi
  */
 public interface CategoryService extends BaseService {
 

@@ -14,8 +14,6 @@ import java.util.Date;
 /**
  * Jwt工具类
  *
- * @author
- * @date 2019/03/29
  */
 @Slf4j
 public class JwtUtils {

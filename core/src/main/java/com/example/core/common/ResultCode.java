@@ -4,7 +4,6 @@ import lombok.Getter;
 
 /**
  *
- * @author faker
  */
 @Getter
 public enum ResultCode implements IResultCode {

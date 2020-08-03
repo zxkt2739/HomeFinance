@@ -18,11 +18,9 @@ import java.util.Vector;
  *
  * @package:  com.example.module1.service
  * @description: 支出明细表
- * @author: fenmi
  * @date: Created in 2020-07-31 16:00:03
  * @copyright: Copyright (c) 2020
  * @version: V1.0
- * @modified: fenmi
  */
 public interface ExpendService extends BaseService {
 

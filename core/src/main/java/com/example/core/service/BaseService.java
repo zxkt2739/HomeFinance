@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author faker
  */
 public interface BaseService<T extends BaseEntity> {
 

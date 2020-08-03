@@ -10,7 +10,6 @@ import java.util.Date;
 
 /**
  *
- * @author faker
  */
 public class LongDateSerializer extends JsonSerializer<Long> {
 

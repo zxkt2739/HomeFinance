@@ -15,11 +15,7 @@ import java.util.List;
  *
  * @package:  com.example.module1.mapper
  * @description: 主分类表
- * @author: fenmi
- * @date: Created in 2020-07-31 15:59:49
- * @copyright: Copyright (c) 2020
  * @version: V1.0
- * @modified: fenmi
  */
 @Mapper
 public interface CategoryDAO extends BaseDAO<Category> {

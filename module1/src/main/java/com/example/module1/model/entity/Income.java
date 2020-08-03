@@ -17,9 +17,6 @@ import java.math.BigDecimal;
  *
  * @package:  com.example.module1.entity
  * @description: 收入明细表
- * @author: fenmi
- * @date: Created in 2020-07-31 15:59:40
- * @copyright: Copyright (c) 2020
  */
 @Data
 @ApiModel(description = "收入明细表")

@@ -32,11 +32,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @package:  com.example.module1.controller
  * @description: 主分类表
- * @author: fenmi
- * @date: Created in 2020-07-31 16:00:13
- * @copyright: Copyright (c) 2020
  * @version: V1.0
- * @modified: fenmi
  */
 @RestController
 @RequestMapping("/category")

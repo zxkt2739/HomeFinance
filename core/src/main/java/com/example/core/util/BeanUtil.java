@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 /**
- * @author faker
+ *
  */
 public class BeanUtil {
 

@@ -7,7 +7,6 @@ import lombok.Data;
 
 /**
  *
- * @author faker
  */
 @Data
 public class BaseDTO {

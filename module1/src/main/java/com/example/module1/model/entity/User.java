@@ -14,9 +14,6 @@ import java.io.Serializable;
  *
  * @package:  com.example.module1.entity
  * @description: 用户表
- * @author: fenmi
- * @date: Created in 2020-07-31 15:59:42
- * @copyright: Copyright (c) 2020
  */
 @Data
 @ApiModel(description = "用户表")

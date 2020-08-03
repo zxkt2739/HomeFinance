@@ -2,7 +2,6 @@ package com.example.core.common;
 
 /**
  *
- * @author faker
  */
 public interface IResultCode {
     /**

@@ -19,8 +19,6 @@ import java.math.BigDecimal;
  * </p>
  *
  * @description: 支出明细表
- * @author: fenmi
- * @date: Created in 2020-07-31 15:59:47
  */
 @ApiModel("支出明细表")
 @Data

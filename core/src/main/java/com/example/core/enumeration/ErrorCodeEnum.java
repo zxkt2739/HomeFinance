@@ -5,7 +5,6 @@ import lombok.Getter;
 /**
  * 错误码枚举
  *
- * @author
  * @date 2019/04/08
  */
 @Getter

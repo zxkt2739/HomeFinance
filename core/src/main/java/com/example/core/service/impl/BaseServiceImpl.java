@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
 /**
- * @author faker
+ *
  */
 public class BaseServiceImpl<T extends BaseEntity> implements BaseService<T> {
 
@@ -70,7 +70,6 @@ public class BaseServiceImpl<T extends BaseEntity> implements BaseService<T> {
     }
     /**
      * 获取当前语言，默认保持英文
-     * @author faker
      * @param request
      * @return
      */

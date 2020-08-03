@@ -1,8 +1,7 @@
 package com.example.core.exception;
 
 /**
- * @author faker
- * @since 2019/07/03
+ *
  */
 public class BizException extends Exception {
 

@@ -28,11 +28,7 @@ import java.util.*;
  *
  * @package: com.example.module1.service.impl
  * @description: 用户表
- * @author: fenmi
- * @date: Created in 2020-08-03 10:38:53
- * @copyright: Copyright (c) 2020
  * @version: V1.0
- * @modified: fenmi
  */
 @Service
 @Slf4j

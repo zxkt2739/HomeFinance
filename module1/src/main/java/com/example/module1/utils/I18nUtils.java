@@ -7,7 +7,6 @@ import java.util.Locale;
 
 /**
  * 国际化工具类
- * @author faker
  */
 @Component
 public class I18nUtils {

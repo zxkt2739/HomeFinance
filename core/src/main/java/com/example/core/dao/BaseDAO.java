@@ -5,7 +5,6 @@ import java.util.Map;
 
 /**
  *
- * @author faker
  * @param <T>
  */
 public interface BaseDAO<T> {

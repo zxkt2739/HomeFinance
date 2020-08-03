@@ -16,8 +16,6 @@ import java.security.NoSuchAlgorithmException;
 /**
  * @description：加解密
  *
- * @date：2019/5/22
- * @author：Rainc
  */
 @Slf4j
 public class EncryptUtil {

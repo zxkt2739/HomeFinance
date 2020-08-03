@@ -17,8 +17,6 @@ import java.io.Serializable;
  * </p>
  *
  * @description: 子分类表
- * @author: fenmi
- * @date: Created in 2020-07-31 15:59:45
  */
 @ApiModel("子分类表")
 @Data

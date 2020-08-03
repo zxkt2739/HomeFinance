@@ -18,11 +18,7 @@ import java.util.Vector;
  *
  * @package:  com.example.module1.service
  * @description: 用户表
- * @author: fenmi
- * @date: Created in 2020-08-03 10:38:53
- * @copyright: Copyright (c) 2020
  * @version: V1.0
- * @modified: fenmi
  */
 public interface MemberService extends BaseService {
 

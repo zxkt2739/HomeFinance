@@ -15,8 +15,6 @@ import java.io.Serializable;
  * </p>
  *
  * @description: 用户表
- * @author: fenmi
- * @date: Created in 2020-07-31 15:59:46
  */
 @ApiModel("用户表")
 @Data

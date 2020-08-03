@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author faker
  * @param <T>
  */
 public class BaseController<T extends BaseEntity> {
@@ -132,7 +131,6 @@ public class BaseController<T extends BaseEntity> {
 
     /**
      * 获取当前语言，默认保持英文
-     * @author faker
      * @param request
      * @return
      */

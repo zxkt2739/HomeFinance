@@ -20,8 +20,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * 缓存工具类
  *
- * @author
- * @date 2019/03/29
  */
 @Component
 @Slf4j
