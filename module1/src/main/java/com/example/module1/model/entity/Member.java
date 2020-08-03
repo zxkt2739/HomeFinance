@@ -11,36 +11,25 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 子分类表
+ * 用户表
  * </p>
  *
  * @package:  com.example.module1.entity
- * @description: 子分类表
+ * @description: 用户表
  * @author: fenmi
- * @date: Created in 2020-07-31 15:59:41
+ * @date: Created in 2020-08-03 10:38:53
  * @copyright: Copyright (c) 2020
  */
 @Data
-@ApiModel(description = "子分类表")
+@ApiModel(description = "用户表")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SubCategory extends BaseEntity implements Serializable {
+public class Member extends BaseEntity implements Serializable {
 
   /**
-   * 子类型名称
+   * 姓名
    */
-  @ApiModelProperty(value = "子类型名称")
+  @ApiModelProperty(value = "姓名")
   private String name;
-  /**
-   * 主分类表id
-   */
-  @ApiModelProperty(value = "主分类表id")
-  @JsonSerialize(using = LongJsonSerializer.class)
-  private Long categoryId;
-  /**
-   * 类别：1-支出，2-收入
-   */
-  @ApiModelProperty(value = "类别：1-支出，2-收入")
-  private Integer type;
   /**
    * 用户表id
    */

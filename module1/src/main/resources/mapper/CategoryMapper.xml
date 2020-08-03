@@ -6,6 +6,7 @@
     <id property="id" jdbcType="BIGINT" column="id"/>
     <result property="name" jdbcType="VARCHAR" column="name"/>
     <result property="type" jdbcType="TINYINT" column="type"/>
+    <result property="userId" jdbcType="BIGINT" column="user_id"/>
     <result property="createdBy" jdbcType="BIGINT" column="created_by"/>
     <result property="createdDate" jdbcType="BIGINT" column="created_date"/>
     <result property="modifiedBy" jdbcType="BIGINT" column="modified_by"/>
@@ -26,6 +27,9 @@
         </if>
         <if test="type != null">
           AND `type`=#{type}
+        </if>
+        <if test="userId != null">
+          AND `user_id`=#{userId}
         </if>
         <if test="createdBy != null">
           AND `created_by`=#{createdBy}
@@ -59,6 +63,9 @@
         <if test="type != null">
             ,`type` 
         </if>
+        <if test="userId != null">
+            ,`user_id`
+        </if>
         <if test="createdBy != null">
             ,`created_by` 
         </if>
@@ -87,6 +94,9 @@
         <if test="type != null">
               ,#{type}
         </if>
+        <if test="userId != null">
+              ,#{userId}
+        </if>
         <if test="createdBy != null">
               ,#{createdBy}
         </if>
@@ -113,6 +123,7 @@
         `id`,
         `name`,
         `type`,
+        `user_id`,
         `created_by`,
         `created_date`,
         `modified_by`,
@@ -125,6 +136,7 @@
         #{data.id},
         #{data.name},
         #{data.type},
+        #{data.userId},
         #{data.createdBy},
         #{data.createdDate},
         #{data.modifiedBy},
@@ -146,6 +158,9 @@
         </if>
         <if test="type != null">
           `type`=#{type},
+        </if>
+        <if test="userId != null">
+            `user_id`=#{userId},
         </if>
         <if test="createdBy != null">
           `created_by`=#{createdBy},

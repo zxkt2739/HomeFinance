@@ -7,6 +7,7 @@
     <result property="categoryId" jdbcType="BIGINT" column="category_id"/>
     <result property="subCategoryId" jdbcType="BIGINT" column="sub_category_id"/>
     <result property="amount" jdbcType="DECIMAL" column="amount"/>
+    <result property="memberId" jdbcType="BIGINT" column="member_id"/>
     <result property="userId" jdbcType="BIGINT" column="user_id"/>
     <result property="remark" jdbcType="VARCHAR" column="remark"/>
     <result property="createdBy" jdbcType="BIGINT" column="created_by"/>
@@ -32,6 +33,9 @@
         </if>
         <if test="amount != null">
           AND `amount`=#{amount}
+        </if>
+        <if test="memberId != null">
+          AND `member_id`=#{memberId}
         </if>
         <if test="userId != null">
           AND `user_id`=#{userId}
@@ -74,8 +78,11 @@
         <if test="amount != null">
             ,`amount` 
         </if>
+        <if test="memberId != null">
+            ,`member_id`
+        </if>
         <if test="userId != null">
-            ,`user_id` 
+            ,`user_id`
         </if>
         <if test="remark != null">
             ,`remark` 
@@ -111,6 +118,9 @@
         <if test="amount != null">
               ,#{amount}
         </if>
+        <if test="memberId != null">
+              ,#{memberId}
+        </if>
         <if test="userId != null">
               ,#{userId}
         </if>
@@ -144,6 +154,7 @@
         `category_id`,
         `sub_category_id`,
         `amount`,
+        `member_id`,
         `user_id`,
         `remark`,
         `created_by`,
@@ -159,6 +170,7 @@
         #{data.categoryId},
         #{data.subCategoryId},
         #{data.amount},
+        #{data.memberId},
         #{data.userId},
         #{data.remark},
         #{data.createdBy},
@@ -185,6 +197,9 @@
         </if>
         <if test="amount != null">
           `amount`=#{amount},
+        </if>
+        <if test="memberId != null">
+          `member_id`=#{memberId},
         </if>
         <if test="userId != null">
           `user_id`=#{userId},

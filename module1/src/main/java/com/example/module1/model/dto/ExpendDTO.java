@@ -48,6 +48,12 @@ public class ExpendDTO extends BaseDTO implements Serializable {
     @ApiModelProperty(value = "金额")
     private BigDecimal amount;
     /**
+     * 成员表id
+     */
+    @ApiModelProperty(value = "成员表id")
+    @JsonSerialize(using = LongJsonSerializer.class)
+    private Long memberId;
+    /**
      * 用户表id
      */
     @ApiModelProperty(value = "用户表id")

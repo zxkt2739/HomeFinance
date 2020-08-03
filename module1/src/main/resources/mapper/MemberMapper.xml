@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.module1.dao.SubCategoryDAO">
+<mapper namespace="com.example.module1.dao.MemberDAO">
 
-  <resultMap id="subCategoryMap" type="com.example.module1.model.entity.SubCategory">
+  <resultMap id="memberMap" type="com.example.module1.model.entity.Member">
     <id property="id" jdbcType="BIGINT" column="id"/>
     <result property="name" jdbcType="VARCHAR" column="name"/>
-    <result property="categoryId" jdbcType="BIGINT" column="category_id"/>
-    <result property="type" jdbcType="TINYINT" column="type"/>
     <result property="userId" jdbcType="BIGINT" column="user_id"/>
     <result property="createdBy" jdbcType="BIGINT" column="created_by"/>
     <result property="createdDate" jdbcType="BIGINT" column="created_date"/>
@@ -16,7 +14,7 @@
     <result property="ip" jdbcType="VARCHAR" column="ip"/>
   </resultMap>
 
-  <resultMap id="subCategoryDTOMap" type="com.example.module1.model.dto.SubCategoryDTO" extends="subCategoryMap"></resultMap>
+  <resultMap id="memberDTOMap" type="com.example.module1.model.dto.MemberDTO" extends="memberMap"></resultMap>
 
   <!--通用查询条件-->
   <sql id="basicParams">
@@ -25,12 +23,6 @@
         </if>
         <if test="name != null">
           AND `name`=#{name}
-        </if>
-        <if test="categoryId != null">
-          AND `category_id`=#{categoryId}
-        </if>
-        <if test="type != null">
-          AND `type`=#{type}
         </if>
         <if test="userId != null">
           AND `user_id`=#{userId}
@@ -56,22 +48,16 @@
         </if>
   </sql>
 
-  <insert id="insert" parameterType="com.example.module1.model.entity.SubCategory">
-    INSERT INTO t_sub_category (
+  <insert id="insert" parameterType="com.example.module1.model.entity.Member">
+    INSERT INTO t_member (
         <if test="id != null">
             `id` 
         </if>
         <if test="name != null">
             ,`name` 
         </if>
-        <if test="categoryId != null">
-            ,`category_id` 
-        </if>
-        <if test="type != null">
-            ,`type` 
-        </if>
         <if test="userId != null">
-            ,`user_id`
+            ,`user_id` 
         </if>
         <if test="createdBy != null">
             ,`created_by` 
@@ -98,12 +84,6 @@
         <if test="name != null">
               ,#{name}
         </if>
-        <if test="categoryId != null">
-              ,#{categoryId}
-        </if>
-        <if test="type != null">
-              ,#{type}
-        </if>
         <if test="userId != null">
               ,#{userId}
         </if>
@@ -129,11 +109,9 @@
   </insert>
 
   <insert id="insertList" parameterType="List">
-    INSERT INTO t_sub_category (
+    INSERT INTO t_member (
         `id`,
         `name`,
-        `category_id`,
-        `type`,
         `user_id`,
         `created_by`,
         `created_date`,
@@ -146,8 +124,6 @@
       (
         #{data.id},
         #{data.name},
-        #{data.categoryId},
-        #{data.type},
         #{data.userId},
         #{data.createdBy},
         #{data.createdDate},
@@ -159,8 +135,8 @@
     </foreach>
   </insert>
 
-  <update id="update" parameterType="com.example.module1.model.entity.SubCategory">
-    UPDATE t_sub_category
+  <update id="update" parameterType="com.example.module1.model.entity.Member">
+    UPDATE t_member
     <set>
         <if test="id != null">
           `id`=#{id},
@@ -168,14 +144,8 @@
         <if test="name != null">
           `name`=#{name},
         </if>
-        <if test="categoryId != null">
-          `category_id`=#{categoryId},
-        </if>
-        <if test="type != null">
-          `type`=#{type},
-        </if>
         <if test="userId != null">
-            `user_id`=#{userId},
+          `user_id`=#{userId},
         </if>
         <if test="createdBy != null">
           `created_by`=#{createdBy},
@@ -206,19 +176,19 @@
   </update>
 
   <update id="delete" parameterType="Map">
-      UPDATE t_sub_category
+      UPDATE t_member
       SET `status`=0,`modified_by`=#{modifiedBy},`modified_date`=#{modifiedDate}
       WHERE id = #{id}
   </update>
 
   <delete id="pdelete" parameterType="Map">
-      DELETE FROM t_sub_category
+      DELETE FROM t_member
       WHERE id = #{id}
   </delete>
 
   <select id="count" parameterType="Map" resultType="Integer">
     <![CDATA[
-            SELECT COUNT(DISTINCT id) FROM t_sub_category
+            SELECT COUNT(DISTINCT id) FROM t_member
         ]]>
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <!-- 通用条件引入 -->
@@ -226,20 +196,9 @@
     </trim>
   </select>
 
-  <select id="selectOne" parameterType="Map" resultMap="subCategoryMap">
+  <select id="selectOne" parameterType="Map" resultMap="memberMap">
     <![CDATA[
-            SELECT * FROM t_sub_category
-        ]]>
-    <trim prefix="WHERE" prefixOverrides="AND|OR">
-      <!-- 通用条件引入 -->
-      <include refid="basicParams"/>
-    </trim>
-    LIMIT 1
-  </select>
-
-  <select id="selectOneDTO" parameterType="Map" resultMap="subCategoryDTOMap">
-    <![CDATA[
-            SELECT * FROM t_sub_category
+            SELECT * FROM t_member
         ]]>
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <!-- 通用条件引入 -->
@@ -248,9 +207,20 @@
     LIMIT 1
   </select>
 
-  <select id="select" parameterType="Map" resultMap="subCategoryMap">
+  <select id="selectOneDTO" parameterType="Map" resultMap="memberDTOMap">
     <![CDATA[
-            SELECT * FROM t_sub_category
+            SELECT * FROM t_member
+        ]]>
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+      <!-- 通用条件引入 -->
+      <include refid="basicParams"/>
+    </trim>
+    LIMIT 1
+  </select>
+
+  <select id="select" parameterType="Map" resultMap="memberMap">
+    <![CDATA[
+            SELECT * FROM t_member
         ]]>
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <!-- 通用条件引入 -->
@@ -267,9 +237,9 @@
     </if>
   </select>
 
-  <select id="selectDTO" parameterType="Map" resultMap="subCategoryDTOMap">
+  <select id="selectDTO" parameterType="Map" resultMap="memberDTOMap">
     <![CDATA[
-            SELECT * FROM t_sub_category
+            SELECT * FROM t_member
         ]]>
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <!-- 通用条件引入 -->
@@ -291,7 +261,7 @@
     <foreach collection="columns" item="cname" separator="," open="`" close="`">
         ${cname}
     </foreach>
-    FROM t_sub_category
+    FROM t_member
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <!-- 通用条件引入 -->
       <include refid="basicParams"/>
@@ -310,7 +280,7 @@
   <!--统计相关查询-->
   <select id="groupCount" parameterType="Map" resultType="Map">
     <![CDATA[
-            SELECT ${group} AS `group`, COUNT(DISTINCT id) AS `count` FROM t_sub_category
+            SELECT ${group} AS `group`, COUNT(DISTINCT id) AS `count` FROM t_member
         ]]>
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <!-- 通用条件引入 -->
@@ -322,7 +292,7 @@
 
   <select id="sum" parameterType="Map" resultType="Double">
     <![CDATA[
-            SELECT IFNULL(SUM(${sumfield}),0) AS `sum` FROM t_sub_category
+            SELECT IFNULL(SUM(${sumfield}),0) AS `sum` FROM t_member
         ]]>
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <!-- 通用条件引入 -->
@@ -332,7 +302,7 @@
 
   <select id="groupSum" parameterType="Map" resultType="Map">
     <![CDATA[
-            SELECT ${group} AS `group`, IFNULL(SUM(${sumfield}),0) AS `sum` FROM t_sub_category
+            SELECT ${group} AS `group`, IFNULL(SUM(${sumfield}),0) AS `sum` FROM t_member
         ]]>
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       <!-- 通用条件引入 -->

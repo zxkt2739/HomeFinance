@@ -13,37 +13,26 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
 /**
  * <p>
- * 子分类表
+ * 用户表
  * </p>
  *
- * @description: 子分类表
+ * @description: 用户表
  * @author: fenmi
- * @date: Created in 2020-07-31 15:59:45
+ * @date: Created in 2020-08-03 10:38:53
  */
-@ApiModel("子分类表")
+@ApiModel("用户表")
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SubCategoryDTO extends BaseDTO implements Serializable {
+public class MemberDTO extends BaseDTO implements Serializable {
 
     /**
-     * 子类型名称
+     * 姓名
      */
-    @ApiModelProperty(value = "子类型名称")
+    @ApiModelProperty(value = "姓名")
     private String name;
-    /**
-     * 主分类表id
-     */
-    @ApiModelProperty(value = "主分类表id")
-    @JsonSerialize(using = LongJsonSerializer.class)
-    private Long categoryId;
-    /**
-     * 类别：1-支出，2-收入
-     */
-    @ApiModelProperty(value = "类别：1-支出，2-收入")
-    private Integer type;
     /**
      * 用户表id
      */
