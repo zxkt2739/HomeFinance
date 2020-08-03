@@ -11,6 +11,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
+import java.util.List;
+
 /**
  * <p>
  * 主分类表
@@ -42,5 +44,11 @@ public class CategoryDTO extends BaseDTO implements Serializable {
     @ApiModelProperty(value = "用户表id")
     @JsonSerialize(using = LongJsonSerializer.class)
     private Long userId;
+
+    /**
+     * 子分类列表
+     */
+    @ApiModelProperty(value = "子分类列表")
+    private List<SubCategoryDTO> subCategoryDTOList;
 
 }

@@ -15,7 +15,14 @@
     <result property="ip" jdbcType="VARCHAR" column="ip"/>
   </resultMap>
 
-  <resultMap id="categoryDTOMap" type="com.example.module1.model.dto.CategoryDTO" extends="categoryMap"></resultMap>
+  <resultMap id="categoryDTOMap" type="com.example.module1.model.dto.CategoryDTO" extends="categoryMap">
+      <collection property="subCategoryDTOList" column="id" javaType="ArrayList" select="selectSubcategory"
+                  ofType="com.example.module1.model.dto.SubCategoryDTO"/>
+  </resultMap>
+
+    <select id="selectSubcategory">
+        select * from t_sub_category where category_id = #{id}
+    </select>
 
   <!--通用查询条件-->
   <sql id="basicParams">
