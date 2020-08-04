@@ -2,6 +2,7 @@ package com.example.module1.service.impl;
 
 import com.example.core.util.I18nUtils;
 import com.example.module1.dao.CategoryDAO;
+import com.example.module1.dao.SubCategoryDAO;
 import com.example.module1.model.dto.CategoryDTO;
 import com.example.module1.model.entity.Category;
 import com.example.module1.service.CategoryService;
@@ -36,6 +37,9 @@ public class CategoryServiceImpl extends BaseServiceImpl implements CategoryServ
 
     @Autowired
     private CategoryDAO categoryDAO;
+
+    @Autowired
+    private SubCategoryDAO subCategoryDAO;
 
     @Override
     public void saveCategory(@NonNull CategoryDTO categoryDTO, HttpServletRequest request) throws BizException {
@@ -82,7 +86,9 @@ public class CategoryServiceImpl extends BaseServiceImpl implements CategoryServ
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void logicDeleteCategory(@NonNull Long id, HttpServletRequest request) throws BizException {
+        // 删除主分类
         log.info("逻辑删除，数据id:{}", id);
         Map<String, Object> params = new HashMap<>(3);
         params.put("id", id);
@@ -93,6 +99,11 @@ public class CategoryServiceImpl extends BaseServiceImpl implements CategoryServ
             log.error("逻辑删除异常, rows:{}", rows);
             throw new BizException(I18nUtils.get("delete.failed", getLang(request)));
         }
+
+        // 删除子分类
+        params.remove("id");
+        params.put("catego ryId", id);
+        subCategoryDAO.deleteByParams(params);
     }
 
     @Override

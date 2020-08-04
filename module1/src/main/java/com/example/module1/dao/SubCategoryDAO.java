@@ -34,4 +34,12 @@ public interface SubCategoryDAO extends BaseDAO<SubCategory> {
      */
     SubCategoryDTO selectOneDTO(Map<String, Object> params);
 
+    /**
+     * 逻辑删除
+     *
+     * @param params 筛选条件的键值对
+     * @return 影响的条数
+     */
+    int deleteByParams(Map<String, Object> params);
+
 }

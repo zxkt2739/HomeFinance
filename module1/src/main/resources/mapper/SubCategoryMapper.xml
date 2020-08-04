@@ -211,6 +211,16 @@
       WHERE id = #{id}
   </update>
 
+  <update id="deleteByParams" parameterType="Map">
+      UPDATE t_sub_category
+      SET `status`=0,`modified_by`=#{modifiedBy},`modified_date`=#{modifiedDate}
+      <trim prefix="WHERE" prefixOverrides="AND|OR">
+          <if test="categoryId != null">
+              AND `category_id`=#{categoryId}
+          </if>
+      </trim>
+  </update>
+
   <delete id="pdelete" parameterType="Map">
       DELETE FROM t_sub_category
       WHERE id = #{id}
