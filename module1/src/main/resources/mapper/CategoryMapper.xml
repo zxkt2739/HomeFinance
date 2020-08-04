@@ -20,7 +20,7 @@
                   ofType="com.example.module1.model.dto.SubCategoryDTO"/>
   </resultMap>
 
-    <select id="selectSubcategory">
+    <select id="selectSubcategory" parameterType="Map" resultType="com.example.module1.model.dto.SubCategoryDTO">
         select * from t_sub_category where category_id = #{id}
     </select>
 
