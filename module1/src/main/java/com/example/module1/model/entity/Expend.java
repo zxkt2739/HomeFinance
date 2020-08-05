@@ -1,5 +1,6 @@
 package com.example.module1.model.entity;
 
+import com.example.core.config.LongDateSerializer;
 import com.example.core.config.LongJsonSerializer;
 import com.example.core.model.entity.BaseEntity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -57,5 +58,10 @@ public class Expend extends BaseEntity implements Serializable {
    */
   @ApiModelProperty(value = "备注")
   private String remark;
+  /**
+   * 时间
+   */
+  @JsonSerialize(using = LongDateSerializer.class)
+  private Long date;
 
 }

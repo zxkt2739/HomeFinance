@@ -1,5 +1,6 @@
 package com.example.module1.model.dto;
 
+import com.example.core.config.LongDateSerializer;
 import com.example.core.config.LongJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.example.core.model.dto.BaseDTO;
@@ -62,5 +63,26 @@ public class ExpendDTO extends BaseDTO implements Serializable {
      */
     @ApiModelProperty(value = "备注")
     private String remark;
+    /**
+     * 时间
+     */
+    @JsonSerialize(using = LongDateSerializer.class)
+    private Long date;
+
+    /**
+     * 分类名称
+     */
+    @ApiModelProperty(value = "分类名称")
+    private String categoryName;
+    /**
+     * 子分类名称
+     */
+    @ApiModelProperty(value = "子分类名称")
+    private String subCategoryName;
+    /**
+     * 成员名称
+     */
+    @ApiModelProperty(value = "成员名称")
+    private String memberName;
 
 }
