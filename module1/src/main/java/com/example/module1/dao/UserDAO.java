@@ -34,4 +34,15 @@ public interface UserDAO extends BaseDAO<User> {
      */
     UserDTO selectOneDTO(Map<String, Object> params);
 
+    /**
+     * 根据Id更新last_login_time上次登陆时间字段
+     * last_login_ip 上次登陆IP字段
+     *
+     * @param params 数据结构 Map<key, Map<key, value>>
+     *               key:datas里放需要更新的键值对；
+     *               conditions里放where条件筛选条件键值对
+     * @return 影响的条数
+     */
+    int updateLastLoginDate(Long params);
+
 }
